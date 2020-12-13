@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/dashboardCss.css'>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/dashboard">
+                <h1 class="textBlue">Tracksactions</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search by category"
+                                name="search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </li>
+
+                </ul>
+
+            </div>
+            <div class="textBlue">
+                <h5>Welcome, <%= user.name %></h5>
+            </div>&nbsp &nbsp
+            <form action="/users/logout" method="get">
+                <button type="submit" class="btn btn-danger">Signout</button>
+            </form>
+        </nav>
+    </div>
+    <div class="sidenav">
+        <a href="/home">Home</a>
+        <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add New
+            Expense</a>
+        <a href="#" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">View
+            Expenses</a>
+        <a href="https://forms.gle/2D3MYr1TSCAr1vTm9" target="_blank">Report Bug(s)</a>
+    </div>
+    <div class="main">
+        <%- include("DashboardContent")-%>
+    </div>
+
+    <%- include("Footer") -%>

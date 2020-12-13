@@ -1,0 +1,102 @@
+<%- include("./partials/messages") %>
+<!-- add new expense -->
+<div id="id01" class="modal">
+    <form class="modal-content animate" action="/addnew" method="post">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                title="Close Modal">&times;</span>
+        </div>
+
+        <div class="container container-fluid">
+            <label for="uname"><b>User</b></label>
+            <input type="text" value="<%= user.email %>" name="uname" disabled>
+            <label for="date"><b>Date</b></label>
+            <input type="text" value="<%= calculatedData.today %>" name="today" disabled>
+            <label for="spent_cate"><b>Choose a category</b></label>
+            <select id="spent_cate" name="spent_cate" required>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Books">Books</option>
+                <option value="Others">Others</option>
+            </select>
+            <label for="spent_on"><b>Spent on(Optional)</b></label>
+            <input type="text" name="spent_on">
+            <label for="spent_amnt"><b>Amount</b></label>
+            <input type="number" placeholder="Amount in ₹" name="spent_amnt" required>
+            <div class="row-fluid add_buttons">
+                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-danger cancelbtn"
+                    onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+<!-- View expenses -->
+<div id="id02" class="modal">
+    <div class="imgcontainer">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container-fluid modal-content2 animate">
+        <table class="table">
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col">Spent On</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Total Spent</th>
+            </tr>
+            <% for(var i=0; i < userdata.length; i++) { %>
+            <tr>
+                <td><%= userdata[i].entrydate.toLocaleDateString("en-US") %> </td>
+                <td><%= userdata[i].spent_category %> </td>
+                <td><%= userdata[i].spent_on %> </td>
+                <td><%= userdata[i].amount %> </td>
+                <td><%= userdata[i].total %> </td>
+            </tr>
+            <% } %>
+        </table>
+
+        <div class="row-fluid add_buttons">
+            <button type="button" class="btn btn-danger cancelbtn"
+                onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <i class="fa fa-code-fork"></i>
+                <span class="count-numbers">₹<%= calculatedData.totalSpent %></span>
+                <span class="count-name">Total Spent</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter danger">
+                <i class="fa fa-ticket"></i>
+                <span class="count-numbers">₹<%= calculatedData.bal_left%></span>
+                <span class="count-name">Balance Left</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter success">
+                <i class="fa fa-database"></i>
+                <span class="count-numbers">₹<%= calculatedData.max_trans%></span>
+                <span class="count-name">Max Transaction</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter info">
+                <i class="fa fa-users"></i>
+                <span class="count-numbers"><%= calculatedData.overbudget%></span>
+                <span class="count-name">Overbudget</span>
+            </div>
+        </div>
+
+    </div>
