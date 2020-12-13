@@ -46,7 +46,6 @@ router.get("/home", (req, res) => {
             }
         }
            ]).then((res) => {
-            console.log(res);
             max_bal = res[0].max_bal;
             totalSpent = res[0].totalAmount;
             max_trans = res[0].max_trans;
