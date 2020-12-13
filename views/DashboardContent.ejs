@@ -1,7 +1,7 @@
 <%- include("./partials/messages") %>
 <!-- add new expense -->
 <div id="id01" class="modal">
-    <form class="modal-content animate" action="/addnew" method="post">
+    <form id="addForm" class="modal-content animate" action="/addnew" method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close"
                 title="Close Modal">&times;</span>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="container-fluid modal-content2 animate">
-        <table class="table">
+        <table id="table" class="table">
             <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Category</th>
@@ -57,12 +57,16 @@
                 <td><%= userdata[i].total %> </td>
             </tr>
             <% } %>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-danger cancelbtn"
+                        onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                </td>
+                <td>
+                    <button type="button" class="btn darkmode" id="darkmode">Dark mode</button>
+                </td>
+            </tr>
         </table>
-
-        <div class="row-fluid add_buttons">
-            <button type="button" class="btn btn-danger cancelbtn"
-                onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        </div>
     </div>
 </div>
 <div class="container">
@@ -100,3 +104,16 @@
         </div>
 
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#darkmode").click(function () {
+                $("#table").toggleClass("table-dark");
+            });
+            $("#switchDark").click(function () {
+                $(document.body).toggleClass("dark");
+                $("#header").toggleClass("navbar-dark");
+                $("#addForm").toggleClass("fulldark");
+            });
+
+        });
+    </script>

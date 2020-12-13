@@ -17,11 +17,11 @@ body {
 }
 
 .card {
-  height: 370px;
+  height: auto;
   margin-top: auto;
   margin-bottom: auto;
   width: 400px;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .card-header h3 {
@@ -46,6 +46,7 @@ input:focus {
 .login_btn {
   color: black;
   background-color: #ffc312;
+  font-weight: bold;
   width: 100px;
 }
 

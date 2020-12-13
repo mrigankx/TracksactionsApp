@@ -4,19 +4,20 @@
 
 .sidenav {
   height: 100%;
-  width: 160px;
+  width: 250px;
   position: absolute;
   left: 5;
-  background-color: #111;
+  background-color: rgb(63, 33, 145);
   overflow-x: hidden;
   padding-top: 20px;
   font-weight: bold;
 }
 
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  /* padding: 6px 8px 6px 16px; */
+  padding: 20px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   color: white;
   display: block;
   border-bottom: white solid 1px;
@@ -37,7 +38,7 @@
   }
 }
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
+  margin-left: 250px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
@@ -75,6 +76,15 @@ select {
   width: auto;
   padding: 10px 18px;
   background-color: #f44336;
+}
+.darkmode {
+  width: auto;
+  padding: 10px 18px;
+  background-color: black;
+  color: white;
+}
+.darkmode:hover {
+  background-color: rgb(87, 80, 80);
 }
 
 /* Center the image and position the close button */
@@ -210,9 +220,15 @@ span.psw {
   background-color: #26c6da;
   color: #fff;
 }
-
+.dark {
+  background-color: #1c1c1b;
+}
+.fulldark {
+  background-color: #1c1c1b;
+  color: white;
+}
 .card-counter i {
-  font-size: 5em;
+  font-size: 2em;
   opacity: 0.2;
 }
 
