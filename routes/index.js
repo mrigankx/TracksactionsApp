@@ -13,8 +13,10 @@ let max_trans = 0;
 let bal_left = 0;
 let overbudget = 0;
 let overbudgetString = "No";
-let date = new Date();
-date = date.toLocaleDateString("en-US");
+let todaydate = new Date(); 
+let thismonth = todaydate.getMonth() + 1;
+let thisyear = todaydate.getFullYear();
+let date = todaydate.toLocaleDateString("en-US");
 const emailuser = {
     id: 'tracksactionsapp@gmail.com',
     pass: 'tracksactions@901'
@@ -32,31 +34,48 @@ router.get('/', (req, res) => {
 //register page
 router.get("/home", (req, res) => {
     user = req.user;
+    max_bal = user.max_balance;
+    console.log("Max Balance: "+max_bal);
     UserData.aggregate([
         {
             $match:
-                { username: user.email }
+            {
+                username: user.email
+            }
         }, 
         {
             $group: {
-                _id: "$username",
+                _id: {
+                    month: { $month: "$entrydate" },
+                    year: { $year: "$entrydate" },
+                    
+                },
                 totalAmount: { $sum: "$amount" },
                 max_trans: { $max: "$amount" },
-                max_bal: { $first: '$max_balance' }
             }
         }
-           ]).then((res) => {
-            max_bal = res[0].max_bal;
-            totalSpent = res[0].totalAmount;
-            max_trans = res[0].max_trans;
+    ]).then((res) => {
+        // console.log(res);
+        res.forEach(item => {
+        // console.log("\nMonth got from arr: "+item._id.month+"| Month from today: "+thismonth+"\n Year got from arr: "+item._id.year+"| Year from today: "+thisyear);
+        });
+        res.forEach(item => {
+            if (item._id.month === thismonth && item._id.year === thisyear)
+            {
+                console.log("Found match:"+item);
+                totalSpent = item.totalAmount;
+                max_trans = item.max_trans;
+            }
+          
+           
+        });
             bal_left = Number(max_bal - totalSpent);
-        if (bal_left <= 0)
-        {   
+            if (bal_left <= 0)
+            {   
             overbudget = Math.abs(bal_left);
             overbudgetString = "Yes(₹"+overbudget+")";
             bal_left = 0;
-        }
-        
+            }
     });
     UserData.find(
         {
@@ -90,14 +109,13 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 
 router.post("/addnew", (req, res) => {
     let uname = user.email;
-    let today = date;
     let spent_on = req.body.spent_on;
     let amnt = req.body.spent_amnt;
     let spent_cate = req.body.spent_cate;
     total = +totalSpent + +amnt;
     const newentry = new UserData({
         username : uname,
-        entrydate: today,
+        entrydate: todaydate,
         spent_category: spent_cate,
         spent_on :spent_on,
         amount: amnt,
