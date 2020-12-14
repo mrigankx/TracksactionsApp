@@ -39,7 +39,7 @@
             title="Close Modal">&times;</span>
     </div>
 
-    <div class="container-fluid modal-content2 animate">
+    <div class="container-fluid modal-content2 animate table-responsive">
         <table id="table" class="table">
             <tr>
                 <th scope="col">Date</th>
@@ -71,7 +71,7 @@
 </div>
 <div class="container-fluid">
     <div class="row row-fluid">
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="card-counter primary">
                 <i class="fa fa-code-fork"></i>
                 <span class="count-numbers">₹<%= calculatedData.totalSpent %></span>
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="card-counter danger">
                 <i class="fa fa-ticket"></i>
                 <span class="count-numbers">₹<%= calculatedData.bal_left%></span>
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="card-counter success">
                 <i class="fa fa-database"></i>
                 <span class="count-numbers">₹<%= calculatedData.max_trans%></span>
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <div class="card-counter info">
                 <i class="fa fa-users"></i>
                 <span class="count-numbers"><%= calculatedData.overbudget%></span>

@@ -17,7 +17,7 @@
   /* padding: 6px 8px 6px 16px; */
   padding: 20px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.25vw;
   color: white;
   display: block;
   border-bottom: white solid 1px;
@@ -39,7 +39,7 @@
 }
 .main {
   margin-left: 20%; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
+  font-size: 2vw; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
 
@@ -60,6 +60,7 @@ select {
 .add_buttons button {
   color: white;
   padding: 14px 20px;
+  font-size: 1.2vw;
   margin: 8px 0;
   border: none;
   cursor: pointer;
@@ -191,7 +192,7 @@ span.psw {
   margin: 5px;
   padding: 20px 10px;
   background-color: #fff;
-  height: 100px;
+  height: 100%;
   border-radius: 5px;
   transition: 0.3s linear all;
 }
@@ -236,7 +237,7 @@ span.psw {
   position: absolute;
   right: 35px;
   top: 20px;
-  font-size: 32px;
+  font-size: 2.6vw;
   display: block;
 }
 
@@ -248,5 +249,5 @@ span.psw {
   text-transform: capitalize;
   opacity: 0.5;
   display: block;
-  font-size: 18px;
+  font-size: 1.3vw;
 }
