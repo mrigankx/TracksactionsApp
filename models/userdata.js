@@ -33,5 +33,4 @@ const userDataSchema  = new mongoose.Schema({
 
 });
 const UserData= mongoose.model('Userdata',userDataSchema);
-
 module.exports = UserData;

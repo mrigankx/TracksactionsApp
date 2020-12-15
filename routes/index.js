@@ -29,7 +29,6 @@ const transporter = nodemailer.createTransport({
 router.get('/', (req, res) => {
     res.render('Login');
 });
-//register page
 router.get("/home", (req, res) => {
     user = req.user;
     UserData.aggregate([
