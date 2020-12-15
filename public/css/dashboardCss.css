@@ -254,10 +254,10 @@ span.psw {
 }
 
 #chart {
-  margin-top: 50px;
+  margin-top: 3vw;
   /* background-color: black; */
-  height: 400px;
-  width: 400px;
+  height: 40%;
+  width: 80%;
   /* display: none; */
 }
 
