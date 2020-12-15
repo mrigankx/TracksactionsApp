@@ -249,3 +249,16 @@ span.psw {
   display: block;
   font-size: 1.5vw;
 }
+
+#chart {
+  margin-top: 3vw;
+  /* background-color: black; */
+  height: 40%;
+  width: 80%;
+  /* display: none; */
+}
+
+#chart h3 {
+  text-align: center;
+  text-decoration: underline;
+}

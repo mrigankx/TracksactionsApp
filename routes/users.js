@@ -62,7 +62,8 @@ router.post('/register', (req, res) => {
                 const newUser = new User({
                     name: name,
                     email: email,
-                    password: password
+                    password: password,
+                    max_balance: max_balance
                 });
                 //hash password
                 bcrypt.genSalt(10, (err, salt) =>
@@ -84,8 +85,7 @@ router.post('/register', (req, res) => {
                     username : email,
                     spent_category: "Opening acount",
                     amount: 0,
-                    total: 0,
-                    max_balance: max_balance
+                    total: 0
                 });
                 newData.save();
             } //ELSE statement ends here

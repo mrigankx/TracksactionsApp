@@ -16,6 +16,9 @@ password :{
 date :{
     type : Date,
     default : Date.now
+    }, 
+max_balance: {
+        type: Number
     }
 });
 const User= mongoose.model('User',UserSchema);
