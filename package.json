@@ -1,7 +1,6 @@
 {
   "name": "tracksactions-expense-app",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,5 +23,15 @@
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrigankx/TracksactionsApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mrigankx/TracksactionsApp/issues"
+  },
+  "homepage": "https://github.com/mrigankx/TracksactionsApp#readme",
+  "description": ""
 }
