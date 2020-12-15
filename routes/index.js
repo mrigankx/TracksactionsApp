@@ -4,7 +4,14 @@ const router = express.Router();
 const UserData = require("../models/userdata.js");
 const { ensureAuthenticated } = require('../configs/auth.js');
 const nodemailer = require('nodemailer');
-//login page
+let amounts = {
+        Food: 0,
+        Travel: 0,
+        Books: 0,
+        Drinks: 0,
+        Grocery: 0,
+        Others: 0,
+    };
 let user = "";
 let userdata = [];
 let totalSpent = 0;
@@ -35,7 +42,6 @@ router.get('/', (req, res) => {
 router.get("/home", (req, res) => {
     user = req.user;
     max_bal = user.max_balance;
-    console.log("Max Balance: "+max_bal);
     UserData.aggregate([
         {
             $match:
@@ -48,21 +54,16 @@ router.get("/home", (req, res) => {
                 _id: {
                     month: { $month: "$entrydate" },
                     year: { $year: "$entrydate" },
-                    
+                    // categories: "$spent_category"
                 },
                 totalAmount: { $sum: "$amount" },
                 max_trans: { $max: "$amount" },
             }
         }
     ]).then((res) => {
-        // console.log(res);
-        res.forEach(item => {
-        // console.log("\nMonth got from arr: "+item._id.month+"| Month from today: "+thismonth+"\n Year got from arr: "+item._id.year+"| Year from today: "+thisyear);
-        });
         res.forEach(item => {
             if (item._id.month === thismonth && item._id.year === thisyear)
             {
-                console.log("Found match:"+item);
                 totalSpent = item.totalAmount;
                 max_trans = item.max_trans;
             }
@@ -91,20 +92,51 @@ router.get("/home", (req, res) => {
 router.get('/register', (req, res) => {
     res.render('Register');
 });
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
+router.get("/dashboard", ensureAuthenticated, (req, resp) => {
+    UserData.aggregate([
+        {
+            $match:
+            {
+                username: user.email
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$entrydate" },
+                    month: { $month: "$entrydate" },
+                    categories: "$spent_category"
+                },
+                totalAmount: { $sum: "$amount" }
+            }
+        }
+    ]).then((res) => {
+        res.forEach(item => {
+            if (item._id.month === thismonth && item._id.year === thisyear && item._id.categories!= "Opening acount") {
+                let percent = (item.totalAmount / totalSpent) * 100;
+                for (var key of Object.keys(amounts)) {
+                    if (key === item._id.categories) {
+                        amounts[key] = percent;
+                    }
+                }
+            }
+        });
     let calculatedData = {
         totalSpent: totalSpent,
         today: date,
         bal_left: bal_left,
         max_trans: max_trans,
-        overbudget: overbudgetString
+        overbudget: overbudgetString,
+        chartData: amounts
     };
-    res.render('Dashboard', {
+    resp.render('Dashboard', {
         user: user,
         userdata: userdata,
         calculatedData: calculatedData
     });
     
+    });
+     
 });
 
 router.post("/addnew", (req, res) => {
@@ -129,11 +161,11 @@ router.post("/addnew", (req, res) => {
         text: "Hi, "+user.name+"! This an automated mail from Tracksactions App. You are going over budget,please check your expenses."
     };
     if (total > max_bal)
-    { console.log("sending an email alert");
+    { 
         transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-        console.log(error);
-        } else {
+        }
+        else {
         console.log('Email sent: ' + info.response);
         }
         });
@@ -149,6 +181,14 @@ router.get('/logout', (req, res) => {
     req.logout();
     overbudget = 0;
     overbudgetString = "No";
+    amounts = {
+        Food: 0,
+        Travel: 0,
+        Books: 0,
+        Drinks: 0,
+        Grocery: 0,
+        Others: 0,
+    };
     req.flash("sucess_msg", "Now logged out");
     res.redirect("/");
 });

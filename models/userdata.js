@@ -23,10 +23,6 @@ const userDataSchema  = new mongoose.Schema({
         required: false,
         default: 0
     },
-    // max_balance: {
-    //     type: Number,
-    //     required: false
-    // },
     overbudgetAmount: {
         type: Number
     }

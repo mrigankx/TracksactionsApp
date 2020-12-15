@@ -6,7 +6,6 @@
             <span onclick="document.getElementById('id01').style.display='none'" class="close"
                 title="Close Modal">&times;</span>
         </div>
-
         <div class="container container-fluid">
             <label for="uname"><b>User</b></label>
             <input type="text" value="<%= user.email %>" name="uname" disabled>
@@ -17,6 +16,8 @@
                 <option value="Food">Food</option>
                 <option value="Travel">Travel</option>
                 <option value="Books">Books</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Grocery">Grocery</option>
                 <option value="Others">Others</option>
             </select>
             <label for="spent_on"><b>Spent on(Optional)</b></label>
@@ -28,10 +29,10 @@
                 <button type="button" class="btn btn-danger cancelbtn"
                     onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
             </div>
-
         </div>
     </form>
 </div>
+
 <!-- View expenses -->
 <div id="id02" class="modal">
     <div class="imgcontainer">
@@ -104,6 +105,10 @@
         </div>
 
     </div>
+    <div id="chart">
+        <h3>Spents by Categories</h3>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
     <script>
         $(document).ready(function () {
             $("#darkmode").click(function () {
@@ -115,5 +120,26 @@
                 $("#addForm").toggleClass("fulldark");
             });
 
+            //chart
+            var myVar = '<%- JSON.stringify(calculatedData.chartData) %>';
+            myVar = JSON.parse(myVar);
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Food", "Travel", "Books", "Drinks", "Grocery", "Others"],
+                    datasets: [{
+                        data: [myVar.Food, myVar.Travel, myVar.Books, myVar.Drinks, myVar.Grocery, myVar.Others], // Specify the data values array
+
+                        borderColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", '#19e0cc', '#1c6ce6', '#f76fee'], // Add custom color border 
+                        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", '#19e0cc', '#1c6ce6', '#f76fee'], // Add custom color background (Points and Fill)
+                        borderWidth: 1 // Specify bar border width
+                    }]
+                },
+                options: {
+                    responsive: true, // Instruct chart js to respond nicely.
+                    maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+                }
+            });
         });
     </script>
