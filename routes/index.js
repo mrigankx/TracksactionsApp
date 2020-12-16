@@ -88,6 +88,7 @@ router.get("/home", (req, res) => {
     
 });
 
+
 router.get('/register', (req, res) => {
     res.render('Register');
 });

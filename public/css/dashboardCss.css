@@ -1,6 +1,7 @@
 .textBlue {
   color: #218eed;
 }
+
 .sidenav {
   height: 100%;
   width: 20%;
@@ -80,6 +81,7 @@ select {
 .darkmode {
   width: auto;
   padding: 10px 18px;
+  font-size: 1.2vw;
   background-color: black;
   color: white;
 }
@@ -102,7 +104,6 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -252,13 +253,44 @@ span.psw {
 
 #chart {
   margin-top: 3vw;
-  /* background-color: black; */
-  height: 40%;
+  height: 60%;
   width: 80%;
-  /* display: none; */
 }
 
 #chart h3 {
   text-align: center;
   text-decoration: underline;
+}
+
+/* for responsiveness in mobile */
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    width: 85%; /* Could be more or less, depending on screen size */
+  }
+  .darkmode {
+    width: auto;
+    font-size: 2vw;
+  }
+  .sidenav a {
+    font-size: 1.5vw;
+  }
+  .modal-content2 {
+    width: 90%; /* Could be more or less, depending on screen size */
+  }
+  .add_buttons button {
+    font-size: 4vw;
+  }
+
+  .card-counter .count-numbers {
+    font-size: 4vw;
+  }
+
+  .card-counter .count-name {
+    font-size: 3vw;
+  }
+  #chart {
+    margin-top: 2vw;
+    height: 40%;
+    width: 100%;
+  }
 }
