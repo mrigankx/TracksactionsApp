@@ -89,9 +89,6 @@ router.post('/register', (req, res) => {
                 });
                 newData.save();
             } //ELSE statement ends here
-
-            
-    
         });
     }
 });
