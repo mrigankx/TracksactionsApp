@@ -109,8 +109,10 @@
     </div>
     <div id="chart">
         <h3>Spend by Categories</h3>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart"></canvas>
     </div>
+    <canvas id="barChart"></canvas>
+
     <script>
         $(document).ready(function () {
             $("#darkmode").click(function () {
@@ -119,7 +121,10 @@
             $("#switchDark").click(function () {
                 $(document.body).toggleClass("dark");
                 $("#header").toggleClass("navbar-dark");
+                $("#table").toggleClass("table-dark");
                 $("#addForm").toggleClass("fulldark");
+                $("h3").toggleClass("fulldark");
+                $("input").toggleClass("fulldark");
             });
             //chart
             var myVar = '<%- JSON.stringify(calculatedData.chartData) %>';
@@ -142,4 +147,39 @@
                 }
             });
         });
+        //Bar chart
+        var bardata = '<%- JSON.stringify(calculatedData.bardata) %>';
+        bardata = JSON.parse(bardata);
+
+        var barctx = document.getElementById("barChart").getContext("2d");
+
+        new Chart(barctx,
+            {
+                "type": "bar",
+                "data": {
+                    "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
+                    "datasets": [
+                        {
+                            "label": "Yearly Spend analysis",
+                            "data": [bardata.month1, bardata.month2, bardata.month3, bardata.month4, bardata.month5, bardata.month6, bardata.month7, bardata.month8, bardata.month9, bardata.month10, bardata.month11, bardata.month12],
+                            "fill": false,
+                            "backgroundColor": ["rgba(255, 99, 132, 0.8)", "rgba(255, 159, 64, 0.8)", "rgba(255, 205, 86, 0.8)", "rgba(75, 192, 192, 0.8)", "rgba(54, 162, 235, 0.8)", "rgba(153, 102, 255, 0.8)", "rgba(201, 203, 207, 0.8)", "rgba(5, 40, 240, 0.8)", "rgba(7, 235, 15, 0.8)", "rgba(235, 7, 15, 0.8)", "rgba(102, 108, 120, 0.8)", "rgba(167, 163, 247, 0.8)"],
+                            "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)", "rgba(5, 40, 240)", "rgba(7, 235, 15)", "rgba(235, 7, 15)", "rgba(102, 108, 120)", "rgba(167, 163, 247)"],
+                            "borderWidth": 1
+                        }]
+                },
+                "options": {
+                    "scales":
+                    {
+                        "yAxes": [
+                            {
+                                "ticks":
+                                {
+                                    "beginAtZero": true
+                                }
+                            }]
+                    }
+                }
+            });
+
     </script>

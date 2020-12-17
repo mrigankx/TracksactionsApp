@@ -229,6 +229,9 @@ span.psw {
   background-color: #1c1c1b;
   color: white;
 }
+.textWhite {
+  color: white;
+}
 .card-counter i {
   font-size: 2em;
   opacity: 0.2;
@@ -260,11 +263,16 @@ span.psw {
   width: 80%;
 }
 
-#chart h3 {
+h3 {
   text-align: center;
   text-decoration: underline;
 }
-
+#barChart {
+  margin-top: 100px;
+  margin-left: 3vw;
+  height: 70%;
+  width: 90%;
+}
 /* for responsiveness in mobile */
 @media only screen and (max-width: 600px) {
   .modal-content {
@@ -296,4 +304,17 @@ span.psw {
     height: 40%;
     width: 100%;
   }
+  #barChart {
+    height: 100%;
+    width: 100%;
+  }
 }
+/* .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+} */

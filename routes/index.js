@@ -12,6 +12,20 @@ let amounts = {
         Grocery: 0,
         Others: 0,
     };
+let bardata = {
+    "month1": 0,
+    "month2": 0,
+    "month3": 0,
+    "month4": 0,
+    "month5": 0,
+    "month6": 0,
+    "month7": 0,
+    "month8": 0,
+    "month9": 0,
+    "month10": 0,
+    "month11": 0,
+    "month12": 0
+};
 let user = "";
 let userdata = [];
 let totalSpent = 0;
@@ -66,8 +80,9 @@ router.get("/home", (req, res) => {
                 totalSpent = item.totalAmount;
                 max_trans = item.max_trans;
             }
-          
-           
+            if (item._id.year === thisyear) {
+                bardata["month" + item._id.month] = item.totalAmount;
+            }
         });
             bal_left = Number(max_bal - totalSpent);
             if (bal_left <= 0)
@@ -127,7 +142,8 @@ router.get("/dashboard", ensureAuthenticated, (req, resp) => {
         bal_left: bal_left,
         max_trans: max_trans,
         overbudget: overbudgetString,
-        chartData: amounts
+        chartData: amounts,
+        bardata: bardata
     };
     resp.render('Dashboard', {
         user: user,
@@ -189,6 +205,20 @@ router.get('/logout', (req, res) => {
         Grocery: 0,
         Others: 0,
     };
+    bardata = {
+    "month1": 0,
+    "month2": 0,
+    "month3": 0,
+    "month4": 0,
+    "month5": 0,
+    "month6": 0,
+    "month7": 0,
+    "month8": 0,
+    "month9": 0,
+    "month10": 0,
+    "month11": 0,
+    "month12": 0
+};
     req.flash("sucess_msg", "Now logged out");
     res.redirect("/users/login");
 });
