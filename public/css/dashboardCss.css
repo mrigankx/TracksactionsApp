@@ -4,42 +4,43 @@
 
 .sidenav {
   height: 100%;
-  width: 20%;
-  position: absolute;
-  left: 5;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
   background-color: rgb(63, 33, 145);
   overflow-x: hidden;
-  padding-top: 20px;
-  font-weight: bold;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
 .sidenav a {
-  /* padding: 6px 8px 6px 16px; */
-  padding: 20px;
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 1.25vw;
-  color: white;
+  font-size: 1.8vw;
+  color: #818181;
   display: block;
-  border-bottom: white solid 1px;
+  transition: 0.3s;
 }
+
 .sidenav a:hover {
   color: #f1f1f1;
-  background-color: #218eed;
 }
-.sidenav a:active {
-  background-color: rgb(20, 180, 20);
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
+.openNav {
+  font-size: 30px;
+  cursor: pointer;
 }
 .main {
-  margin-left: 20%; /* Same as the width of the sidenav */
-  font-size: 2vw; /* Increased text to enable scrolling */
+  font-size: 2vw;
   padding: 0px 10px;
 }
 
@@ -191,7 +192,6 @@ span.psw {
   box-shadow: 2px 2px 10px #dadada;
   margin: 5px;
   padding: 20px 10px;
-  background-color: #fff;
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -242,7 +242,7 @@ span.psw {
   right: 35px;
   top: 20px;
   font-size: 2.9vw;
-  display: block;
+  display: inline-block;
 }
 
 .card-counter .count-name {
@@ -250,8 +250,6 @@ span.psw {
   font-style: italic;
   text-transform: capitalize;
   opacity: 0.5;
-  /* right: 20px;
-  top: 65px; */
   display: block;
   font-size: 1.5vw;
   margin-bottom: 10px;
@@ -275,6 +273,9 @@ h3 {
 }
 /* for responsiveness in mobile */
 @media only screen and (max-width: 600px) {
+  .sidenav a {
+    font-size: 2vw;
+  }
   .modal-content {
     width: 85%; /* Could be more or less, depending on screen size */
   }
@@ -308,13 +309,7 @@ h3 {
     height: 100%;
     width: 100%;
   }
+  .openNav {
+    font-size: 25px;
+  }
 }
-/* .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: red;
-  color: white;
-  text-align: center;
-} */

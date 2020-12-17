@@ -23,7 +23,7 @@
             <label for="spent_on"><b>Spent on(Optional)</b></label>
             <input type="text" name="spent_on">
             <label for="spent_amnt"><b>Amount</b></label>
-            <input type="number" placeholder="Amount in ₹" name="spent_amnt" required>
+            <input type="number" placeholder="Amount in ₹" name="spent_amnt" min="1" max="99999" required>
             <div class="row-fluid add_buttons">
                 <button type="submit" class="btn btn-primary">Add</button>
                 <button type="button" class="btn btn-danger cancelbtn"
@@ -150,9 +150,7 @@
         //Bar chart
         var bardata = '<%- JSON.stringify(calculatedData.bardata) %>';
         bardata = JSON.parse(bardata);
-
         var barctx = document.getElementById("barChart").getContext("2d");
-
         new Chart(barctx,
             {
                 "type": "bar",
@@ -181,5 +179,11 @@
                     }
                 }
             });
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "30%";
+        }
 
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
     </script>

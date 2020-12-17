@@ -88,7 +88,7 @@ router.get("/home", (req, res) => {
             if (bal_left <= 0)
             {   
             overbudget = Math.abs(bal_left);
-            overbudgetString = "Yes(₹"+overbudget+")";
+            overbudgetString = "₹"+overbudget;
             bal_left = 0;
             }
     });

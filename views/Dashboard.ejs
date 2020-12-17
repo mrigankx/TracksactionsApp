@@ -43,7 +43,10 @@
         </nav>
     </div>
     <hr>
-    <div class="sidenav">
+    <span class="openNav" onclick="openNav()">&#9776; Menu</span>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/home"><i class="fa fa-home"></i> Home</a>
         <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i
                 class="fa fa-plus" aria-hidden="true"></i> Add New
@@ -54,8 +57,6 @@
         <a href="https://forms.gle/2D3MYr1TSCAr1vTm9" target="_blank"><i class="fa fa-bug" aria-hidden="true"></i>
             Report Bug(s)</a>
     </div>
-
     <div class="main">
         <%- include("DashboardContent")-%>
     </div>
-    <!-- <footer>Copyright © 2020. Developer@mrigankx.</footer> -->
