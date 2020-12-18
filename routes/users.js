@@ -37,7 +37,7 @@ router.post('/register', (req, res) => {
         errors.push({ msg: 'Password should be at least 6 characters' });
     }
     if (errors.length > 0) {
-        res.render('register', {
+        res.render('Register', {
             errors: errors,
             name: name,
             email: email,
@@ -50,7 +50,7 @@ router.post('/register', (req, res) => {
             if (user) {
                 errors.push({ msg: 'Email already registered' });
                 // res.render(res, errors, name, email, password, password2);
-                res.render('register', {
+                res.render('Register', {
                     errors: errors,
                     name: name,
                     email: email,
