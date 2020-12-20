@@ -4,13 +4,19 @@ const router = express.Router();
 const UserData = require("../models/userdata.js");
 const { ensureAuthenticated } = require('../configs/auth.js');
 const nodemailer = require('nodemailer');
+const _ = require("lodash");
 let amounts = {
-        Food: 0,
-        Travel: 0,
-        Books: 0,
-        Drinks: 0,
-        Grocery: 0,
-        Others: 0,
+        'FoodDining': 0,
+        'Entertainment': 0,
+        'Education': 0,
+        'Shopping': 0,
+        'HealthFitness': 0,
+        'GiftsDonations': 0,
+        'Investments': 0,
+        'BillsUtilities': 0,
+        'TravelTransport': 0,
+        'DrinksSmoking': 0,
+        'Others': 0
     };
 let bardata = {
     "month1": 0,
@@ -67,7 +73,6 @@ router.get("/home", (req, res) => {
                 _id: {
                     month: { $month: "$entrydate" },
                     year: { $year: "$entrydate" },
-                    // categories: "$spent_category"
                 },
                 totalAmount: { $sum: "$amount" },
                 max_trans: { $max: "$amount" },
@@ -129,8 +134,11 @@ router.get("/dashboard", ensureAuthenticated, (req, resp) => {
         res.forEach(item => {
             if (item._id.month === thismonth && item._id.year === thisyear && item._id.categories!= "Opening acount") {
                 let percent = (item.totalAmount / totalSpent) * 100;
+                let cate = item._id.categories;
+                cate = cate.replace("&", "");
+                cate = cate.replace(/ /g, "");
                 for (var key of Object.keys(amounts)) {
-                    if (key === item._id.categories) {
+                    if (key === cate) {
                         amounts[key] = percent;
                     }
                 }
@@ -198,12 +206,17 @@ router.get('/logout', (req, res) => {
     overbudget = 0;
     overbudgetString = "No";
     amounts = {
-        Food: 0,
-        Travel: 0,
-        Books: 0,
-        Drinks: 0,
-        Grocery: 0,
-        Others: 0,
+        'FoodDining': 0,
+        'Entertainment': 0,
+        'Education': 0,
+        'Shopping': 0,
+        'HealthFitness': 0,
+        'GiftsDonations': 0,
+        'Investments': 0,
+        'BillsUtilities': 0,
+        'TravelTransport': 0,
+        'DrinksSmoking': 0,
+        'Others': 0
     };
     bardata = {
     "month1": 0,
