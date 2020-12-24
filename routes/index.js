@@ -5,6 +5,7 @@ const UserData = require("../models/userdata.js");
 const { ensureAuthenticated } = require('../configs/auth.js');
 const nodemailer = require('nodemailer');
 const _ = require("lodash");
+
 let amounts = {
         'FoodDining': 0,
         'Entertainment': 0,
@@ -45,8 +46,8 @@ let thismonth = todaydate.getMonth() + 1;
 let thisyear = todaydate.getFullYear();
 let date = todaydate.toLocaleDateString("en-US");
 const emailuser = {
-    id: 'tracksactionsapp@gmail.com',
-    pass: 'tracksactions@901'
+    id: process.env.EmailId,
+    pass: process.env.EmailPass
 };
 const transporter = nodemailer.createTransport({
   service: 'gmail',
