@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(expressEjsLayout);
 app.use(express.static("public"));
 const port = process.env.PORT || 3000;
-mongoose.connect("mongodb+srv://mrigankx:test@cluster0.khu7t.mongodb.net/tracksactionsDB?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected,,'))
+mongoose.connect(process.env.MongoURL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected,,'))
     .catch((err) => console.log(err));
 app.use(session({
     secret: 'secret',
