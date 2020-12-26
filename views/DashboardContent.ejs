@@ -37,7 +37,29 @@
         </div>
     </form>
 </div>
-
+<!-- Change max balance window -->
+<div id="changeMaxBalance" class="modal">
+    <form id="addForm" class="modal-content animate" action="/updatemaxbalance" method="post">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('changeMaxBalance').style.display='none'" class="close"
+                title="Close Modal">&times;</span>
+        </div>
+        <div class="container container-fluid">
+            <label for="usrname"><b>Name</b></label>
+            <input type="text" value="<%= user.name %>" name="usrname" disabled>
+            <label for="prev_max"><b>Current Maximum Balance</b></label>
+            <input type="text" value="<%= user.max_balance %>" name="prev_max" disabled>
+            <label for="new_max"><b>New Maximum Balance</b></label>
+            <input type="number" name="new_max" min="500" max="100001" required>
+            <div class="row-fluid add_buttons">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-danger cancelbtn"
+                    onclick="document.getElementById('changeMaxBalance').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
 <!-- View expenses -->
 <div id="id02" class="modal">
     <div class="imgcontainer">
@@ -54,6 +76,7 @@
                 <th scope="col">Spent On</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Total Spent</th>
+                <th scope="col">Overbudget Amount</th>
             </tr>
             <% for(var i=0; i < userdata.length; i++) { %>
             <tr>
@@ -62,6 +85,7 @@
                 <td><%= userdata[i].spent_on %> </td>
                 <td>₹<%= userdata[i].amount %> </td>
                 <td>₹<%= userdata[i].total %> </td>
+                <td>₹<%= userdata[i].overbudgetAmount %> </td>
             </tr>
             <% } %>
             <tr>
@@ -152,18 +176,18 @@
                         'Others'],
                     datasets: [{
                         data: [
-                        myVar.FoodDining,
-                        myVar.Entertainment,
-                        myVar.Education,
-                        myVar.Shopping,
-                        myVar.HealthFitness,
-                        myVar.GiftsDonations,
-                        myVar.Investments,
-                        myVar.BillsUtilities,
-                        myVar.TravelTransport,
-                        myVar.DrinksSmoking,
-                        myVar.Others
-                    ], // Specify the data values array
+                            myVar.FoodDining,
+                            myVar.Entertainment,
+                            myVar.Education,
+                            myVar.Shopping,
+                            myVar.HealthFitness,
+                            myVar.GiftsDonations,
+                            myVar.Investments,
+                            myVar.BillsUtilities,
+                            myVar.TravelTransport,
+                            myVar.DrinksSmoking,
+                            myVar.Others
+                        ], // Specify the data values array
                         borderColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", '#19e0cc', '#1c6ce6', '#f76fee', 'rgb(0,0,128)', 'rgba(0,255,255, 0.7)', 'rgb(128,0,128)', 'rgb(255,0,0)'], // Add custom color border 
                         backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", '#19e0cc', '#1c6ce6', '#f76fee', 'rgb(0,0,128)', 'rgba(0,255,255, 0.7)', 'rgb(128,0,128)', 'rgb(255,0,0)'], // Add custom color background (Points and Fill)
                         borderWidth: 1 // Specify bar border width
@@ -214,4 +238,12 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+
+        function showUpdateMaxbalance(currentDate) {
+            var today = currentDate.getDate();
+            if (today <= 5) {
+                $("#maxBalanceBtn").fadeIn();
+            }
+        }
+        showUpdateMaxbalance(new Date()); // now
     </script>

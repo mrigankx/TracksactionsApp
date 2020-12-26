@@ -310,3 +310,9 @@ h3 {
     font-size: 25px;
   }
 }
+/* Max balance button */
+#maxBalanceBtn {
+  margin-left: 10px;
+  outline: none;
+  display: none;
+}

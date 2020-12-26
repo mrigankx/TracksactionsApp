@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const UserData = require("../models/userdata.js");
+const User = require("../models/user.js");
 const { ensureAuthenticated } = require('../configs/auth.js');
 const nodemailer = require('nodemailer');
 const _ = require("lodash");
@@ -170,6 +171,7 @@ router.post("/addnew", (req, res) => {
     let amnt = req.body.spent_amnt;
     let spent_cate = req.body.spent_cate;
     total = +totalSpent + +amnt;
+    overbudget = Math.abs(max_bal - total);
     const newentry = new UserData({
         username : uname,
         entrydate: todaydate,
@@ -201,6 +203,20 @@ router.post("/addnew", (req, res) => {
     }).catch(value => console.log(value));
     bal_left = Number(max_bal - total);
     res.redirect('/home');
+});
+router.post("/updatemaxbalance", (req, res) => {
+    const new_max = parseInt(req.body.new_max);
+    const myquery = { name: user.name, email: user.email };
+    const newvalues = { $set: { max_balance: new_max } };
+    User.updateOne(myquery, newvalues, (err)=> {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.flash("success_msg", "Maximum Balance successfully.");
+        }
+     });
+    res.redirect("/home");
 });
 router.get('/logout', (req, res) => {
     req.logout();

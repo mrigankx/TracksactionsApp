@@ -85,7 +85,8 @@ router.post('/register', (req, res) => {
                     username : email,
                     spent_category: "Opening acount",
                     amount: 0,
-                    total: 0
+                    total: 0,
+                    overbudgetAmount: 0,
                 });
                 newData.save();
             } //ELSE statement ends here
