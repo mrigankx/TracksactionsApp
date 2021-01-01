@@ -171,7 +171,13 @@ router.post("/addnew", (req, res) => {
     let amnt = req.body.spent_amnt;
     let spent_cate = req.body.spent_cate;
     total = +totalSpent + +amnt;
-    overbudget = Math.abs(max_bal - total);
+    bal_left = Number(max_bal - total);
+    if (bal_left <= 0)
+        {   
+            overbudget = Math.abs(bal_left);
+            overbudgetString = "₹"+overbudget;
+            bal_left = 0;
+        }
     const newentry = new UserData({
         username : uname,
         entrydate: todaydate,
