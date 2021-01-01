@@ -222,6 +222,12 @@ router.get('/logout', (req, res) => {
     req.logout();
     overbudget = 0;
     overbudgetString = "No";
+    totalSpent = 0;
+    max_bal = 0;
+    max_trans = 0;
+    bal_left = 0;
+    user = "";
+    userdata = [];
     amounts = {
         'FoodDining': 0,
         'Entertainment': 0,
