@@ -83,7 +83,7 @@ router.post('/register', (req, res) => {
                         }));
                 const newData = new UserData({
                     username : email,
-                    spent_category: "Opening acount",
+                    spent_category: "Opening account",
                     amount: 0,
                     total: 0,
                     overbudgetAmount: 0,
@@ -99,5 +99,58 @@ router.post('/login', (req, res, next) => {
         failureRedirect: "/users/login",
         failureFlash: true,
     })(req, res, next);
+});
+router.get("/resetpassword", (req, res) => {
+    res.render("ResetPassword");
+});
+router.post("/resetpassword", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const password2 = req.body.password2;
+    let errors = [];
+    if (password !== password2) {
+        errors.push({ msg: "Passwords don't match" });
+    }
+    //check if password is more than 6 characters
+    if (password.length < 6) {
+        errors.push({ msg: 'Password should be at least 6 characters' });
+    }
+    if (errors.length > 0) {
+        res.render('ResetPassword', {
+            errors: errors,
+            email: email,
+            password: password,
+            password2: password2
+        });
+    } 
+    else {
+        //validation passed
+        User.findOne({ email: email }).exec((err, user) => {
+            if (user) {
+                bcrypt.genSalt(10, (err, salt) =>
+                    bcrypt.hash(password, salt,
+                        (err, hash) => {
+                            if (err) throw err;
+                            //save pass to hash
+                            User.updateOne(
+                                {
+                                     email: email
+                                },
+                                {
+                                     $set : {password: hash}
+                                }
+                            ).then((value) => {
+                                    req.flash("success_msg", "Password changed successfully");
+                                    res.redirect('/users/login');
+                                })
+                                .catch(value => console.log(value));
+                      
+                        }));
+            } else {
+                
+                
+            }
+        });
+    }
 });
 module.exports  = router;

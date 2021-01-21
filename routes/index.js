@@ -1,4 +1,5 @@
 //jshint esversion: 6
+require("dotenv").config();
 const express = require('express');
 const router = express.Router();
 const UserData = require("../models/userdata.js");
@@ -101,9 +102,10 @@ router.get("/home", (req, res) => {
     });
     UserData.find(
         {
-            username: user.email
+            username: user.email,
+            spent_category: { $ne: "Opening account" }
         }
-    ).then((res) => {
+    ).sort({entrydate: -1}).then((res) => {
         userdata = res;
     });
     res.redirect("/dashboard");
